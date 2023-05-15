@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/fareedalam/Projects/OICD/TodoApi/TodoApi.csproj": {}
+    "/Users/fareedalam/Projects/okta/TodoApi/TodoApi.csproj": {}
   },
   "projects": {
-    "/Users/fareedalam/Projects/OICD/TodoApi/TodoApi.csproj": {
+    "/Users/fareedalam/Projects/okta/TodoApi/TodoApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/fareedalam/Projects/OICD/TodoApi/TodoApi.csproj",
+        "projectUniqueName": "/Users/fareedalam/Projects/okta/TodoApi/TodoApi.csproj",
         "projectName": "TodoApi",
-        "projectPath": "/Users/fareedalam/Projects/OICD/TodoApi/TodoApi.csproj",
+        "projectPath": "/Users/fareedalam/Projects/okta/TodoApi/TodoApi.csproj",
         "packagesPath": "/Users/fareedalam/.nuget/packages/",
-        "outputPath": "/Users/fareedalam/Projects/OICD/TodoApi/obj/",
+        "outputPath": "/Users/fareedalam/Projects/okta/TodoApi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/fareedalam/.nuget/NuGet/NuGet.Config"
@@ -40,6 +40,10 @@
           "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
+            "Microsoft.AspNetCore.Authorization": {
               "target": "Package",
               "version": "[6.0.16, )"
             },
