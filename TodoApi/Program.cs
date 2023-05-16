@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -47,17 +48,58 @@ builder.Services.AddSwaggerGen(c =>
     builder.Services.Configure<OktaTokenSettings>(builder.Configuration.GetSection("Okta"));
     var oktaSettings = builder.Configuration.GetSection("Okta").Get<OktaTokenSettings>();
 
-    builder.Services.AddAuthentication(option =>
-    {
-        option.DefaultAuthenticateScheme = OktaDefaults.ApiAuthenticationScheme;
-        option.DefaultChallengeScheme = OktaDefaults.ApiAuthenticationScheme;
-        option.DefaultSignInScheme = OktaDefaults.ApiAuthenticationScheme;
-    }).AddOktaWebApi(new OktaWebApiOptions
-    {
-        OktaDomain = oktaSettings.Domain,
-        AuthorizationServerId = oktaSettings.AuthorizationServerId,
-        Audience = oktaSettings.Audience
-    });
+    // builder.Services.AddAuthentication(option =>
+    // {
+    //     option.DefaultAuthenticateScheme = OktaDefaults.ApiAuthenticationScheme;
+    //     option.DefaultChallengeScheme = OktaDefaults.ApiAuthenticationScheme;
+    //     option.DefaultSignInScheme = OktaDefaults.ApiAuthenticationScheme;
+        
+    
+    // }).AddOktaWebApi(new OktaWebApiOptions
+    // {
+    //     OktaDomain = oktaSettings.Domain,
+    //     //  OktaIssuer= oktaSettings.Domain,
+    //     //AuthorizationServerId = oktaSettings.AuthorizationServerId,
+    //     Audience = oktaSettings.Audience
+    // });
+builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = OktaDefaults.ApiAuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.Authority = oktaSettings.Domain;
+            options.Audience = oktaSettings.Audience;
+         })
+
+//  builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//                 .AddJwtBearer(option =>
+//                 {
+//                     option.TokenValidationParameters = new TokenValidationParameters
+//                     {
+//                         ValidateIssuerSigningKey = false,
+//                         //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])),
+//                         ValidateIssuer = true,
+//                         ValidateAudience = true,
+//                     };
+//                 }).AddJwtBearer(options =>{
+//                     options.Audience=oktaSettings.Audience;
+//                     options.Authority=oktaSettings.Domain;
+//                 });
+
+
+    //.AddOktaWebApi(new OktaWebApiOptions
+    // {
+    //     OktaDomain = oktaSettings.Domain,
+    //     //  OktaIssuer= oktaSettings.Domain,
+    //     //AuthorizationServerId = oktaSettings.AuthorizationServerId,
+    //     Audience = oktaSettings.Audience
+    // })
+    ;
+
+   
+
 
 
     builder.Services.AddSingleton<ITokenService, TokenService>();
