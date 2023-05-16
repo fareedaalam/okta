@@ -1,0 +1,26 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
+public void ConfigureServices(IServiceCollection services)
+{
+    // ...
+
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            options.Authority = "https://{your-okta-domain}/oauth2/default";
+            options.Audience = "api://default";
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = "https://{your-okta-domain}/oauth2/default",
+                ValidAudience = "api://default",
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("{your-issuer-signing-key}"))
+            };
+        });
+
+    // ...
+}
