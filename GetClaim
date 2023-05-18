@@ -1,0 +1,26 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+
+
+
+string jwtToken = "your_jwt_token_here";
+
+var tokenHandler = new JwtSecurityTokenHandler();
+var token = tokenHandler.ReadJwtToken(jwtToken);
+
+var groupsClaim = token.Claims.FirstOrDefault(c => c.Type == "groups");
+
+if (groupsClaim != null)
+{
+    string[] groups = groupsClaim.Value.Split(',');
+    
+    // Use the groups as needed
+    foreach (string group in groups)
+    {
+        Console.WriteLine(group);
+    }
+}
+else
+{
+    Console.WriteLine("No groups claim found in the token.");
+}
