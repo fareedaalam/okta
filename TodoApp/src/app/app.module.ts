@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './callback/callback.component';
+import { CompareService } from './compare.service';
 
 // const oktaAuth = new OktaAuth({
 //   issuer: 'https://dev-46138610.okta.com',
@@ -37,13 +38,15 @@ const oktaAuth = new OktaAuth({
   imports: [
     BrowserModule,
     AppRoutingModule,
-    OktaAuthModule.forRoot({oktaAuth})
+    OktaAuthModule.forRoot({oktaAuth}),
   ],
   providers: [
     { 
       provide: OKTA_CONFIG, 
       useValue: { oktaAuth } 
-    }
+      
+    },
+    CompareService
   ],
   bootstrap: [AppComponent]
 })

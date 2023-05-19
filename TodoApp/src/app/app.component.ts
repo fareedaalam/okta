@@ -4,6 +4,7 @@ import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import { AuthState, OktaAuth, Tokens } from '@okta/okta-auth-js';
 //import { AuthState, OktaAuth, Tokens } from 'angular';
 import { Observable, filter, map } from 'rxjs';
+import { CompareService } from './compare.service';
 
 const DEFAULT_ORIGINAL_URI = window.location.origin;
 
@@ -15,13 +16,17 @@ const DEFAULT_ORIGINAL_URI = window.location.origin;
 export class AppComponent {
   title = 'TodoApp';
    signIn1: any;
+    array1 = [4, 5, 3];
+   array2 = [1, 3, 3];
+   result: any[]=[];
   
  // title = 'okta-angular-quickstart';
   public isAuthenticated$!: Observable<boolean>;
 
   constructor(private _router: Router, 
     private _oktaStateService: OktaAuthStateService, 
-     @Inject(OKTA_AUTH) private _oktaAuth: OktaAuth) { }
+     @Inject(OKTA_AUTH) private _oktaAuth: OktaAuth,
+     private _compare:CompareService) { }
 
   public ngOnInit(): void {
     console.log('Is Authenticated ...')
@@ -66,6 +71,12 @@ SampleApp(){
     const accessToken = this._oktaAuth.getAccessToken();
     console.log('Access token:', accessToken);
   })
+}
+
+Compare(){
+  
+  this.result = this._compare.compareArrays(this.array1, this.array2);
+
 }
 
 }

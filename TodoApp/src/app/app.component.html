@@ -7,4 +7,27 @@
 </ng-template>
 
 
+<div class="row">
+  <div class="col-md-12"><button (click)="Compare()">Compare</button></div>
+  <div class="row">
+  {{array1}}
+</div>
+    
+  
+  <div class="row">
+    {{array2}}
+  </div>
+  <div class="row">
+    <span style="color: red">{{result}}</span>
+  </div>
+
+  <!-- <div class="col-md-12">
+    <div *ngFor="let item of result">
+    
+      <span style="color: red">{{item}}</span>
+    </div>
+  </div> -->
+  
+</div>
+
 <app-profile></app-profile>
