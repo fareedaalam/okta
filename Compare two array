@@ -1,3 +1,41 @@
+compareContacts(contact1: contactType, contact2: contactType): contactType {
+    const nonMatchingProps: contactType = {};
+
+    for (const prop in contact1) {
+      if (contact1.hasOwnProperty(prop) && contact2.hasOwnProperty(prop) && contact1[prop] !== contact2[prop]) {
+        nonMatchingProps[prop] = contact1[prop];
+      }
+    }
+
+    return nonMatchingProps;
+  }
+//===========
+compareContactTypes(arr1: ContactType[], arr2: ContactType[]): boolean {
+    // Check if both arrays have the same length
+    if (arr1.length !== arr2.length) {
+      return false;
+    }
+
+    // Sort the arrays to ensure consistent order for comparison
+    const sortedArr1 = arr1.slice().sort();
+    const sortedArr2 = arr2.slice().sort();
+
+    // Compare each element in the arrays
+    for (let i = 0; i < sortedArr1.length; i++) {
+      if (
+        sortedArr1[i].name !== sortedArr2[i].name ||
+        sortedArr1[i].email !== sortedArr2[i].email ||
+        sortedArr1[i].message !== sortedArr2[i].message
+      ) {
+        return false;
+      }
+    }
+
+    // All elements are the same
+    return true;
+  }
+  
+//=================
 function compareArrays(array1, array2) {
   var result = [];
 
