@@ -1,1 +1,63 @@
-I hope this email finds you well amidst your busy schedule. I understand that you're currently occupied with numerous commitments, and I completely respect your time constraints. However, I wanted to reach out to you and touch base on a few matters.
+constructor(private formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.contactForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      message: ['', Validators.required]
+    });
+  }
+
+  // Accessor methods for form controls
+  get name() {
+    return this.contactForm.get('name');
+  }
+
+  get email() {
+    return this.contactForm.get('email');
+  }
+
+  get message() {
+    return this.contactForm.get('message');
+  }
+
+  onSubmit() {
+    if (this.contactForm.valid) {
+      // Perform form submission or API call
+      console.log(this.contactForm.value);
+      // Reset the form
+      this.contactForm.reset();
+    } else {
+      // Mark all form controls as touched to display validation errors
+      this.contactForm.markAllAsTouched();
+    }
+  }
+  
+  
+  
+  //===========
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" formControlName="name" />
+    <div *ngIf="name.touched && name.errors?.required" class="error">Name is required</div>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email" />
+    <div *ngIf="email.touched && email.errors?.required" class="error">Email is required</div>
+    <div *ngIf="email.touched && email.errors?.email" class="error">Invalid email format</div>
+  </div>
+  <div>
+    <label for="message">Message</label>
+    <textarea id="message" formControlName="message"></textarea>
+    <div *ngIf="message.touched && message.errors?.required" class="error">Message is required</div>
+  </div>
+  <button type="submit" [disabled]="!contactForm.valid">Submit</button>
+</form>
+
+//===========
+.error {
+  color: red;
+  margin-top: 5px;
+}
