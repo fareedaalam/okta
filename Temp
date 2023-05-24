@@ -1,3 +1,10 @@
+export interface contactType{
+    name: string;
+    email: Date;
+    message: string;
+    
+}
+//================
 constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
