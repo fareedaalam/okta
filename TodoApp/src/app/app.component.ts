@@ -5,6 +5,7 @@ import { AuthState, OktaAuth, Tokens } from '@okta/okta-auth-js';
 //import { AuthState, OktaAuth, Tokens } from 'angular';
 import { Observable, filter, map } from 'rxjs';
 import { CompareService } from './compare.service';
+import { HttpClient } from '@angular/common/http';
 
 const DEFAULT_ORIGINAL_URI = window.location.origin;
 
@@ -26,9 +27,11 @@ export class AppComponent {
   constructor(private _router: Router, 
     private _oktaStateService: OktaAuthStateService, 
      @Inject(OKTA_AUTH) private _oktaAuth: OktaAuth,
-     private _compare:CompareService) { }
+     private _compare:CompareService,
+     private http: HttpClient) { }
 
   public ngOnInit(): void {
+    this.GetData();
     console.log('Is Authenticated ...')
     this.isAuthenticated$! = this._oktaStateService.authState$.pipe(
       filter((s: AuthState) => !!s),     
@@ -78,5 +81,26 @@ Compare(){
   this.result = this._compare.compareArrays(this.array1, this.array2);
 
 }
+//==========dataGrid
+yourRowData: any[] = []; // Provide your own row data
+yourColumnDefs: any[] = []; // Provide your own column definitions
+
+onRowClick(event: any) {
+  console.log('Row Clicked:', event);
+  // Handle row click event here
+}
+GetData(){
+  this.yourColumnDefs=[
+    { field: 'make'},
+    { field: 'model'},
+    { field: 'price' }
+  ];
+
+this.http.get<any[]>('https://www.ag-grid.com/example-assets/row-data.json').subscribe((res)=>{
+    this.yourRowData=res;
+    console.log(res);
+    });
+}
 
 }
+

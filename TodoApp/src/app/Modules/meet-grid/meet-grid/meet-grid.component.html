@@ -1,0 +1,15 @@
+<div class="ag-theme-alpine" style="height: 500px;">
+    <ag-grid-angular
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions"
+      [pagination]="true"
+      [paginationPageSize]="10"
+     
+      (gridReady)="gridOptions.onGridReady($event)"
+    ></ag-grid-angular>
+  </div>
+  
+  <!-- [enableFilter]="true"
+  [enableSorting]="true"
+  [floatingFilter]="true" -->

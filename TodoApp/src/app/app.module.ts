@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
+import { ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +12,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './callback/callback.component';
 import { CompareService } from './compare.service';
+import { MeetGridModule } from './Modules/meet-grid/data-grid.module';
+
 
 // const oktaAuth = new OktaAuth({
 //   issuer: 'https://dev-46138610.okta.com',
@@ -39,6 +43,9 @@ const oktaAuth = new OktaAuth({
     BrowserModule,
     AppRoutingModule,
     OktaAuthModule.forRoot({oktaAuth}),
+    ReactiveFormsModule ,
+    MeetGridModule  ,
+    HttpClientModule 
   ],
   providers: [
     { 
