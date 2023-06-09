@@ -1,0 +1,62 @@
+// Add authentication services
+services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+   .AddJwtBearer(options =>
+   {
+       // Configure token validation parameters
+       options.TokenValidationParameters = new TokenValidationParameters
+       {
+           ValidateIssuer = true,
+           ValidateAudience = true,
+           ValidateIssuerSigningKey = true,
+           ValidIssuer = "your-issuer",
+           ValidAudience = "your-audience",
+           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-secret-key"))
+       };
+   });
+
+[Authorize(AuthenticationSchemes = NegotiateDefaults.AuthenticationScheme + "," + JwtBearerDefaults.AuthenticationScheme)]
+[ApiController]
+[Route("api/[controller]")]
+public class YourController : ControllerBase
+{
+    // Controller actions
+}
+public class UserService
+{
+    public bool ValidateCredentials(string username, string password)
+    {
+        // Perform validation logic here, such as checking against a database
+        // Return true if the credentials are valid, otherwise false
+    }
+}
+
+[HttpPost]
+public IActionResult Login(string username, string password)
+{
+    bool isValid = _userService.ValidateCredentials(username, password);
+    if (isValid)
+    {
+        // Credentials are valid
+        return Ok("Login successful");
+    }
+    else
+    {
+        // Credentials are invalid
+        return Unauthorized("Invalid username or password");
+    }
+}
+[HttpPost]
+public IActionResult Login(string username, string password)
+{
+    bool isValid = _userService.ValidateCredentials(username, password);
+    if (isValid)
+    {
+        // Credentials are valid
+        return Ok("Login successful");
+    }
+    else
+    {
+        // Credentials are invalid
+        return Unauthorized("Invalid username or password");
+    }
+}
