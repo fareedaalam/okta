@@ -1,0 +1,7 @@
+Both grids have good performance, but AG Grid is known for its superior performance, especially when dealing with large datasets.
+It leverages advanced rendering techniques and provides optimizations like virtualization,
+which can enhance the grid's performance.
+
+G Grid offers a comprehensive set of features, including sorting, filtering, pagination, grouping, row selection, and many more. 
+It also provides advanced features like column pinning, range selection, and rich cell editing. 
+JQGrid has a decent set of features but may not be as extensive as AG Grid.
