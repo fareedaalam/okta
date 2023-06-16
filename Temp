@@ -68,3 +68,11 @@ constructor(private formBuilder: FormBuilder) { }
   color: red;
   margin-top: 5px;
 }
+--==========
+Dear Aman,
+
+I wanted to take a moment to express my heartfelt appreciation for your outstanding work as a QA resource. 
+Your dedication and attention to detail have greatly contributed to the success of our team. 
+Your ability to identify and resolve issues has been exceptional, and your commitment 
+to delivering high-quality results is truly commendable. Your positive attitude and willingness to go above and beyond have not 
+gone unnoticed. Thank you for your hard work and for being an invaluable member of our team.
